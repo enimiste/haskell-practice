@@ -11,13 +11,16 @@ hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
 hanoi 0 _ _ _ = []
 hanoi 1 a _ c = [(a, c)]
 hanoi nbr a b c = (move (nbr - 1) a b c) ++ [(a, c)] ++ (move (nbr - 1) b c a)
-
-move :: Integer -> Peg -> Peg -> Peg -> [Move]
-move 1 from to tmp = [(from, to)]
-move 2 from to tmp = [(from, to), (from, tmp), (tmp, to)]
-move nbr from to tmp = (move (nbr - 1) from tmp to) ++ [(from, to)] ++ (move (nbr - 1) tmp to from)
+    where   move 1 from to tmp = [(from, to)]
+            move 2 from to tmp = [(from, to), (from, tmp), (tmp, to)]
+            move nbr from to tmp = (move (nbr - 1) from tmp to) ++ [(from, to)] ++ (move (nbr - 1) tmp to from)
 
 
 len :: [a] -> Integer
-len [] = 0
-len (x : xs) = 1 + len xs
+len = len' 0
+    where len' n [] = n
+          len' n (_ : xs) = len' (n+1) xs
+
+heead:: [a] -> Maybe a
+heead [] = Nothing
+heead (x:_) = Just x
