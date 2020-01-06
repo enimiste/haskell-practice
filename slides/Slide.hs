@@ -8,8 +8,9 @@ data Expr a = Const a
     | Mult (Expr a) (Expr a)
     | Neg (Expr a)
 
+type IntExpr = Expr Integer
 
-eval :: Expr Integer -> Integer
+eval :: IntExpr -> Integer
 eval e =
     case e of
         Const c -> c
