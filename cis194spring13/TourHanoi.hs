@@ -19,7 +19,7 @@ hanoi nbr a b c = (move (nbr - 1) a b c) ++ [(a, c)] ++ (move (nbr - 1) b c a)
 len :: [a] -> Integer
 len = len' 0
     where len' n [] = n
-          len' n (_ : xs) = len' (n+1) xs
+          len' n (_ : xs) = n `seq` len' (n+1) xs
 
 heead:: [a] -> Maybe a
 heead [] = Nothing
