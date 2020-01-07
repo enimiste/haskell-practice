@@ -1,4 +1,4 @@
-module Slide where
+module Slide (Expr, eval, pyth, Student) where
 
 
 -- DATA TYPES
@@ -18,6 +18,15 @@ eval e =
         Add e1 e2 -> eval e1 + eval e2
         Mult e1 e2 -> eval e1 * eval e2
         Sub e1 e2 -> eval e1 - eval e2
+
+evalNum :: Num a => Expr a -> a
+evalNum e =
+    case e of
+        Const c -> c
+        Neg e1 -> (-1) * evalNum e1
+        Add e1 e2 -> evalNum e1 + evalNum e2
+        Mult e1 e2 -> evalNum e1 * evalNum e2
+        Sub e1 e2 -> evalNum e1 - evalNum e2
 
 -- List comprehension
 pyth :: Integer -> Integer -> [(Integer, Integer, Integer)]
