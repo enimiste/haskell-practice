@@ -27,3 +27,10 @@ takeNthOther ys i n zs = takeNthOther' ys 1 i n zs
             takeNthOther' _ j _ _ zs | j > n = zs
             takeNthOther' (y:ys) j i n zs | j `mod` i == 0 = takeNthOther' ys (j + 1) i n (zs ++ [y])
             takeNthOther' (y:ys) j i n zs = takeNthOther' ys (j + 1) i n zs
+
+localMaxima :: [Integer] -> [Integer]
+localMaxima [] = []
+localMaxima (_:[]) = []
+localMaxima (_:_:[]) = []
+localMaxima (x:ys@(y:z:xs)) | x < y && y > z = [y] ++ localMaxima ys
+localMaxima (_:ys) = localMaxima ys
